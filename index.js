@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 const ApiResponse = require('./utils/apiResponse');
+const { speedInsightsMiddleware } = require('./middlewares/speedInsights');
 
 const { initSocket, sendNotificationToClients } = require('./config/server');
 const { initRealtimeNotifier } = require('./config/realtimeNotifier');
@@ -17,6 +18,12 @@ const PORT =  3000;
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Vercel Speed Insights - Injects tracking script into HTML responses
+app.use(speedInsightsMiddleware({
+    debug: process.env.NODE_ENV === 'development',
+    sampleRate: parseFloat(process.env.SPEED_INSIGHTS_SAMPLE_RATE) || 1
+}));
 
 // Use Routes
 app.use('/api/auth', require('./routes/auth'));
