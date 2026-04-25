@@ -7,6 +7,7 @@ const ApiResponse = require('./utils/apiResponse');
 
 const { initSocket, sendNotificationToClients } = require('./config/server');
 const { initRealtimeNotifier } = require('./config/realtimeNotifier');
+const { analyticsMiddleware } = require('./middlewares/analytics');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,6 +18,9 @@ const PORT =  3000;
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Vercel Web Analytics - Track API requests
+app.use(analyticsMiddleware);
 
 // Use Routes
 app.use('/api/auth', require('./routes/auth'));
