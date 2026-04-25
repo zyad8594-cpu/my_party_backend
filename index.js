@@ -32,6 +32,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/roles', require('./routes/roles'));
 app.use('/api/system_users', require('./routes/systemUsers'));
+app.use('/api/speed-insights', require('./routes/speedInsights'));
 
 // المسار الأساسي للاختبار
 app.get('/', (req, res) => {
