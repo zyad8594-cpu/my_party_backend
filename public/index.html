@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Party Pro - API Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .status::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .info {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: right;
+        }
+        
+        .info h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .info ul {
+            list-style: none;
+            color: #666;
+        }
+        
+        .info li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .info li:last-child {
+            border-bottom: none;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 My Party Pro</h1>
+        <div class="status">الخادم يعمل بنجاح</div>
+        
+        <div class="info">
+            <h2>معلومات الواجهة البرمجية</h2>
+            <ul>
+                <li><span class="badge">API</span>واجهة برمجية لإدارة الحفلات والفعاليات</li>
+                <li><span class="badge">Socket.IO</span>دعم الإشعارات الفورية</li>
+                <li><span class="badge">Analytics</span>تتبع الزيارات باستخدام Vercel Analytics</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h2>نقاط النهاية المتاحة</h2>
+            <ul>
+                <li>/api/auth - المصادقة والتسجيل</li>
+                <li>/api/events - إدارة الفعاليات</li>
+                <li>/api/tasks - إدارة المهام</li>
+                <li>/api/suppliers - إدارة الموردين</li>
+                <li>/api/services - إدارة الخدمات</li>
+                <li>/api/notifications - الإشعارات</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>جميع الحقوق محفوظة © 2024 My Party Pro</p>
+            <p style="margin-top: 10px; font-size: 0.8em;">مُفعّل بواسطة Vercel Web Analytics</p>
+        </div>
+    </div>
+    
+    <!-- Vercel Web Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
