@@ -13,9 +13,14 @@ async function initRealtimeNotifier(sendNotificationToClients) {
 
     try {
         const connectionConfig = {
-            host: process.env.DB_HOST || 'localhost',
-            user: process.env.DB_USER || 'root',
-            password: process.env.DB_PASSWORD || 'root',
+            port: process.env.PORT || 13941,
+            ssl: {
+                ca: fs.readFileSync(process.env.DB_SSL_CA || 'ca.pem')
+            },
+            database: process.env.DB_NAME || 'my_party_4',
+            host: process.env.DB_HOST || 'mysql-myparty-zyad8594-myparty.c.aivencloud.com',
+            user: process.env.DB_USER || 'avnadmin',
+            password: process.env.DB_PASSWORD || 'AVNS_e0cMasOP8rhnQ1hhgm0',
         };
 
         const instance = new MySQLEvents(connectionConfig, {
