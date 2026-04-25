@@ -1,0 +1,395 @@
+-- ======================================================
+-- 1. بيانات المستخدم الأساسي (Admin)
+-- ======================================================
+-- SET FOREIGN_KEY_CHECKS = `OFF`;
+-- TRUNCATE Users;
+-- TRUNCATE user_detail_values;
+-- TRUNCATE clients;
+-- TRUNCATE services;
+-- TRUNCATE supplier_services;
+-- TRUNCATE events;
+-- TRUNCATE task_assigns;
+-- TRUNCATE incomes;
+-- TRUNCATE notifications;
+-- SET FOREIGN_KEY_CHECKS = `ON`;
+
+-- INSERT IGNORE INTO `Users` (`role_name`, `full_name`, `phone_number`, `img_url`, `email`, `password`, `is_active`)
+-- VALUES ('admin', 'admin', '773936481', 'https://i.pravatar.cc/150?u=admin', 'admin@myparty.com', '123456', 1);
+
+-- -- ======================================================
+-- -- 2. إضافة الخدمات (sp_create_service) - 12 خدمة
+-- -- ======================================================
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة التغذية', 'تقديم الطعام والمشروبات للحفلات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة الصوتيات', 'أنظمة صوت ومكبرات للمناسبات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة الديكور', 'تنسيق الزهور والديكورات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة التصوير', 'تصوير فوتوغرافي وفيديو', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة تنظيم الفعاليات', 'إدارة وتنسيق الفعاليات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة الضيافة', 'استقبال الضيوف والخدمات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة الأمن', 'حراس أمن وأنظمة مراقبة', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة النقل', 'تأمين حافلات وسيارات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة الإضاءة', 'إضاءة ديكورية ومسرحية', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة التنسيق', 'تنسيق بين البائعين والخدمات', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة الترفيه', 'فرق موسيقية وألعاب نارية', FALSE);
+-- CALL sp_create_service('admin@myparty.com', '123456', 'خدمة النظافة', 'تنظيف الموقع قبل وبعد الحدث', FALSE);
+
+-- ======================================================
+-- 3. إضافة المنسقين (sp_create_coordinator) - 12 منسق
+-- ======================================================
+-- CALL sp_create_coordinator('أحمد السقا', '714212208', 'https://i.pravatar.cc/150?u=ahmed', 1, 'ahmed@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('سعد الهندي', '714332208', 'https://i.pravatar.cc/150?u=sad', 1, 'sadalh@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('منى النجار', '712345678', 'https://i.pravatar.cc/150?u=mona', 1, 'mona@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('نضال حمود', '713456789', 'https://i.pravatar.cc/150?u=nidal', 1, 'nidal@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('رنا القدسي', '714567890', 'https://i.pravatar.cc/150?u=rana', 1, 'rana@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('باسم فؤاد', '715678901', 'https://i.pravatar.cc/150?u=bassem', 1, 'bassem@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('هدى العفيف', '716789012', 'https://i.pravatar.cc/150?u=hoda', 1, 'hoda@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('كمال الدين', '717890123', 'https://i.pravatar.cc/150?u=kamal', 1, 'kamal@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('سوسن بكر', '718901234', 'https://i.pravatar.cc/150?u=sawsan', 1, 'sawsan@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('جمال عارف', '719012345', 'https://i.pravatar.cc/150?u=gamal', 1, 'gamal@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('لينا صبري', '710123456', 'https://i.pravatar.cc/150?u=lina', 1, 'lina@myparty.com', '123456', FALSE);
+-- CALL sp_create_coordinator('ياسر العمري', '711234567', 'https://i.pravatar.cc/150?u=yasser', 1, 'yasser@myparty.com', '123456', FALSE);
+-- CALL sp_set_user_active(2, 1, FALSE);
+-- CALL sp_set_user_active(3, 1, FALSE);
+-- CALL sp_set_user_active(4, 1, FALSE);
+-- CALL sp_set_user_active(5, 1, FALSE);
+-- CALL sp_set_user_active(6, 1, FALSE);
+-- CALL sp_set_user_active(7, 1, FALSE);
+-- CALL sp_set_user_active(8, 1, FALSE);
+-- CALL sp_set_user_active(9, 1, FALSE);
+-- CALL sp_set_user_active(10, 1, FALSE);
+-- CALL sp_set_user_active(11, 1, FALSE);
+-- CALL sp_set_user_active(12, 1, FALSE);
+-- CALL sp_set_user_active(13, 1, FALSE);
+
+-- ======================================================
+-- 4. إضافة الموردين (sp_create_supplier) - 12 مورد
+-- ======================================================
+-- CALL sp_create_supplier('سامي الذهبي', '711282993', 'https://i.pravatar.cc/150?u=sami', 1, 'sami@myparty.com', '123456', 'صنعاء', 'مورد معتمد', JSON_ARRAY(1,2,9,10), FALSE);
+-- CALL sp_create_supplier('خالد السامعي', '773887987', 'https://i.pravatar.cc/150?u=khaled', 1, 'khaled@myparty.com', '123456', 'إب', 'خبرة 10 سنوات', JSON_ARRAY(3,4,5,6), FALSE);
+-- CALL sp_create_supplier('غرام العبسي', '775653456', 'https://i.pravatar.cc/150?u=gram', 1, 'gram@myparty.com', '123456', 'تعز', 'تجهيزات فاخرة', JSON_ARRAY(7,8,11,12), FALSE);
+-- CALL sp_create_supplier('أكرم الخطيب', '883214567', 'https://i.pravatar.cc/150?u=akram', 1, 'akram@myparty.com', '123456', 'عدن', 'خدمات سريعة', JSON_ARRAY(1,3,5,7), FALSE);
+-- CALL sp_create_supplier('نوال حسن', '712233445', 'https://i.pravatar.cc/150?u=nawal', 1, 'nawal@myparty.com', '123456', 'صنعاء', 'متخصصة في الديكور', JSON_ARRAY(3,9), FALSE);
+-- CALL sp_create_supplier('عبدالله نعمان', '713344556', 'https://i.pravatar.cc/150?u=abdullah', 1, 'abdullah@myparty.com', '123456', 'الحديدة', 'أجهزة صوت وإضاءة', JSON_ARRAY(2,9), FALSE);
+-- CALL sp_create_supplier('فاطمة الزهراء', '714455667', 'https://i.pravatar.cc/150?u=fatima', 1, 'fatima@myparty.com', '123456', 'إب', 'تصوير احترافي', JSON_ARRAY(4,10), FALSE);
+-- CALL sp_create_supplier('ياسر المنصور', '715566778', 'https://i.pravatar.cc/150?u=yaser', 1, 'yaser@myparty.com', '123456', 'تعز', 'تنظيم حفلات', JSON_ARRAY(5,11), FALSE);
+-- CALL sp_create_supplier('شذى القادري', '716677889', 'https://i.pravatar.cc/150?u=shatha', 1, 'shatha@myparty.com', '123456', 'عدن', 'خدمات ضيافة', JSON_ARRAY(6,12), FALSE);
+-- CALL sp_create_supplier('مروان السقاف', '717788990', 'https://i.pravatar.cc/150?u=marwan', 1, 'marwan@myparty.com', '123456', 'صنعاء', 'أمن وحراسة', JSON_ARRAY(7), FALSE);
+-- CALL sp_create_supplier('إيمان باسندوة', '718899001', 'https://i.pravatar.cc/150?u=eman', 1, 'eman@myparty.com', '123456', 'المكلا', 'نقل وتوصيل', JSON_ARRAY(8), FALSE);
+-- CALL sp_create_supplier('خالد الطيب', '719900112', 'https://i.pravatar.cc/150?u=khaled2', 1, 'khaled2@myparty.com', '123456', 'سيئون', 'تنظيف متكامل', JSON_ARRAY(12), FALSE);
+-- CALL sp_set_user_active(14, 1, FALSE);
+-- CALL sp_set_user_active(15, 1, FALSE);
+-- CALL sp_set_user_active(16, 1, FALSE);
+-- CALL sp_set_user_active(17, 1, FALSE);
+-- CALL sp_set_user_active(18, 1, FALSE);
+-- CALL sp_set_user_active(19, 1, FALSE);
+-- CALL sp_set_user_active(20, 1, FALSE);
+-- CALL sp_set_user_active(21, 1, FALSE);
+-- CALL sp_set_user_active(22, 1, FALSE);
+-- CALL sp_set_user_active(23, 1, FALSE);
+-- CALL sp_set_user_active(24, 1, FALSE);
+-- CALL sp_set_user_active(25, 1, FALSE);
+
+
+
+-- ======================================================
+-- 5. إضافة العملاء (sp_create_client) - 12 عميل
+-- ======================================================
+CALL sp_create_client(2, 'هاني الزبادي', '712564789', 'https://i.pravatar.cc/150?u=hani', 'hani@myparty.com', 'صنعاء', FALSE);
+CALL sp_create_client(2, 'أيمن الحاتمي', '712785430', 'https://i.pravatar.cc/150?u=ayman', 'ayman@myparty.com', 'صنعاء', FALSE);
+CALL sp_create_client(3, 'مرام علي', '712089543', 'https://i.pravatar.cc/150?u=maram', 'maram@myparty.com', 'تعز', FALSE);
+CALL sp_create_client(3, 'فوزية هاني', '7120564348', 'https://i.pravatar.cc/150?u=fozia', 'fozih@myparty.com', 'عدن', FALSE);
+CALL sp_create_client(4, 'رامي السعيد', '701234567', 'https://i.pravatar.cc/150?u=rami', 'rami@myparty.com', 'إب', FALSE);
+CALL sp_create_client(5, 'دلال عبدالملك', '702345678', 'https://i.pravatar.cc/150?u=dalal', 'dalal@myparty.com', 'الحديدة', FALSE);
+CALL sp_create_client(6, 'زهير قباطي', '703456789', 'https://i.pravatar.cc/150?u=zuhair', 'zuhair@myparty.com', 'صنعاء', FALSE);
+CALL sp_create_client(7, 'سلوى ناجي', '704567890', 'https://i.pravatar.cc/150?u=salwa', 'salwa@myparty.com', 'تعز', FALSE);
+CALL sp_create_client(8, 'إبراهيم الحكيم', '705678901', 'https://i.pravatar.cc/150?u=ibrahim', 'ibrahim@myparty.com', 'عدن', FALSE);
+CALL sp_create_client(9, 'نادية شرف', '706789012', 'https://i.pravatar.cc/150?u=nadia', 'nadia@myparty.com', 'المكلا', FALSE);
+CALL sp_create_client(10, 'حسن اليمني', '707890123', 'https://i.pravatar.cc/150?u=hasan', 'hasan@myparty.com', 'سيئون', FALSE);
+CALL sp_create_client(11, 'منال الصبري', '708901234', 'https://i.pravatar.cc/150?u=manal', 'manal@myparty.com', 'صنعاء', FALSE);
+
+-- ======================================================
+-- 6. إضافة الأحداث (sp_create_event_full) - 12 حدث
+--    مع تصحيح المهام: إضافة date_start, date_due, user_assign_id حقيقية
+--    user_assign_id: 2-3 منسقين, 4-15 موردين (من القائمة أعلاه)
+-- ======================================================
+
+-- -- حدث 1: حفل تخرج (تاريخ الحدث: 2026-04-15 -> مستقبل)
+-- -- حدث 1: حفل تخرج كلية الهندسة
+-- CALL sp_create_event_full(1, 2, 'حفل تخرج كلية الهندسة', 'تخرج دفعة 2026 - قسم الهندسة المدنية', '2026-04-15', 'صالة الملكة أروى', 10500, 3, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 1, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-10", "date_due": "2026-04-14", "user_assign_id": 14,
+--             "description": "تجهيز بوفيه مفتوح", "cost": 2500, "notes": "لـ 200 شخص", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 3, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-12", "date_due": "2026-04-14", "user_assign_id": 15,
+--             "description": "ديكور خشبي وزهور", "cost": 1800, "notes": "ألوان ذهبية", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 8, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-13", "date_due": "2026-04-14", "user_assign_id": 16,
+--             "description": "إضاءة مسرحية", "cost": 1200, "notes": "LED ملونة", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 5000, "payment_method": "تحويل بنكي", "payment_date": "2026-03-01", "url_image": null, "description": "دفعة أولى"},
+--         {"amount": 5500, "payment_method": "نقدا", "payment_date": "2026-04-10", "url_image": null, "description": "الدفعة المتبقية"}
+--     ]
+-- }');
+
+-- -- حدث 2: حفل زفاف هدى وخالد
+-- CALL sp_create_event_full(2, 2, 'زفاف هدى وخالد', 'حفل زفاف في صالة الذهب', '2026-04-01', 'صالة الذهب', 15000, 1, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 1, "type_task": "SERVICE", "status": "COMPLETED",
+--             "date_start": "2026-04-28", "date_due": "2026-05-1", "user_assign_id": 14,
+--             "description": "عشاء فاخر", "cost": 4000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 3, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 11, "type_task": "SERVICE", "status": "COMPLETED",
+--             "date_start": "2026-04-30", "date_due": "2026-05-2", "user_assign_id": 16,
+--             "description": "مكبرات صوت", "cost": 1500, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 15000, "payment_method": "نقدا", "payment_date": "2026-03-25", "url_image": null, "description": "كامل المبلغ"}
+--     ]
+-- }');
+
+-- -- حدث 3: مؤتمر التسويق الرقمي
+-- CALL sp_create_event_full(3, 3, 'مؤتمر التسويق الرقمي', 'جلسة حوارية مع خبراء', '2026-03-31', 'قاعة المؤتمرات', 8000, 1, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 5, "type_task": "SERVICE", "status": "COMPLETED",
+--             "date_start": "2026-04-20", "date_due": "2026-04-30", "user_assign_id": 17,
+--             "description": "تنظيم جدول الجلسات", "cost": 2000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 5, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 9, "type_task": "SERVICE", "status": "COMPLETED",
+--             "date_start": "2026-04-29", "date_due": "2026-04-30", "user_assign_id": 18,
+--             "description": "استقبال وتسجيل", "cost": 1000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 8000, "payment_method": "شيك", "payment_date": "2026-03-15", "url_image": null, "description": "مقدم من الجهة المنظمة"}
+--     ]
+-- }');
+
+-- -- حدث 4: تخرج كلية الطب
+-- CALL sp_create_event_full(4, 3, 'تخرج كلية الطب', 'حفل تخريج دفعة 2026', '2026-04-08', 'قاعة التاج', 12000, 3, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 2, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-05", "date_due": "2026-04-07", "user_assign_id": 19,
+--             "description": "تصوير فيديو وصور", "cost": 3000, "notes": "طاقم كاميرتين", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 3, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 10, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-06", "date_due": "2026-04-08", "user_assign_id": 20,
+--             "description": "نقل الخريجين", "cost": 1200, "notes": "3 باصات", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 6000, "payment_method": "تحويل", "payment_date": "2026-03-20", "url_image": null, "description": "دفعة أولى"},
+--         {"amount": 6000, "payment_method": "نقدا", "payment_date": "2026-04-05", "url_image": null, "description": "دفعة ثانية"}
+--     ]
+-- }');
+
+-- -- حدث 5: حفل زفاف آخر (تاريخ الحدث: 2026-04-05 -> مستقبل)
+-- CALL sp_create_event_full(1, 2, 'زفاف سلمى ونبيل', 'حفل في صالة النخبة', '2026-04-05', 'صالة النخبة', 20000, 1, 'WEEK', '{
+--     "tasks": [
+--         {
+--             "service_id": 1, "type_task": "SERVICE", "status": "UNDER_REVIEW", 
+--             "date_start": "2026-04-05", "date_due": "2026-04-08", "user_assign_id": 14, 
+--             "description": "وليمة عشاء", "cost": 6000, "notes": "مأكولات بحرية", "url_image": NULL, 
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 8, "type_task": "SERVICE", "status": "COMPLETED", 
+--             "date_start": "2026-04-05", "date_due": "2026-04-09", "user_assign_id": 16, 
+--             "description": "إضاءة رومانسية", "cost": 2000, "notes": NULL, "url_image": NULL, 
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 2000, "payment_method": "نقدا", "payment_date": "2026-03-30", "url_image": NULL, "description": "كامل المبلغ"}
+--     ]
+-- }');
+
+-- CALL sp_create_event_full(2, 3, 'تخرج المعهد العالي', 'دفعة 2026 نظم معلومات', '2026-04-03', 'قاعة التاج', 9500, 3, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 3, "type_task": "SERVICE", "status": "IN_PROGRESS", 
+--             "date_start": "2026-04-28", "date_due": "2026-05-02", "user_assign_id": 15, 
+--             "description": "ديكور المسرح", "cost": 2500, "notes": "ورود طبيعية", "url_image": NULL, 
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 7, "type_task": "SERVICE", "status": "PENDING", 
+--             "date_start": "2026-04-05", "date_due": "2026-04-08", "user_assign_id": 16, 
+--             "description": "ميكروفونات لاسلكية", "cost": 800, "notes": NULL, "url_image": NULL, 
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 5000, "payment_method": "تحويل", "payment_date": "2026-03-10", "url_image": NULL, "description": "دفعة مقدمة"},
+--         {"amount": 4500, "payment_method": "نقدا", "payment_date": "2026-04-01", "url_image": NULL, "description": "باقي المبلغ"}
+--     ]
+-- }');
+
+-- -- حدث 7: حفل زفاف ثالث (تم تحويله من JSON_OBJECT إلى STRING)
+-- CALL sp_create_event_full(3, 2, 'زفاف رانيا ومحمد', 'حفل في صالة الذهب', '2026-04-02', 'صالة الذهب', 18000, 1, 'WEEK', '{
+--     "tasks": [
+--         {
+--             "service_id": 5, "type_task": "SERVICE", "status": "CANCELLED",
+--             "date_start": "2026-04-20", "date_due": "2026-05-01", "user_assign_id": 21,
+--             "description": "حراس أمن", "cost": 1500, "notes": "تم الإلغاء لعدم الحاجة", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 3, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": null, "type_task": "SELF", "status": "COMPLETED",
+--             "date_start": "2026-04-15", "date_due": "2026-05-01", "user_assign_id": null,
+--             "description": "تنسيق عام مع البائعين", "cost": 0, "notes": "عمل داخلي", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 5, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 10000, "payment_method": "شيك", "payment_date": "2026-03-01", "url_image": null, "description": "دفعة أولى"},
+--         {"amount": 8000, "payment_method": "نقدا", "payment_date": "2026-04-01", "url_image": null, "description": "دفعة ثانية"}
+--     ]
+-- }');
+
+-- -- حدث 8: حفل خطوبة (تم تحويله إلى STRING)
+-- CALL sp_create_event_full(5, 4, 'حفل خطوبة ليلى', 'خطوبة على القاعة الكبرى', '2026-05-01', 'قاعة الليالي', 7500, 1, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 1, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-25", "date_due": "2026-04-30", "user_assign_id": 14,
+--             "description": "مقبلات وحلويات", "cost": 2000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 3, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-04-28", "date_due": "2026-04-30", "user_assign_id": 15,
+--             "description": "بالونات وزينة وردية", "cost": 1200, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 7500, "payment_method": "نقدا", "payment_date": "2026-04-20", "url_image": null, "description": "كامل المبلغ"}
+--     ]
+-- }');
+
+-- -- حدث 9: حفل عيد ميلاد (تم تحويله إلى STRING)
+-- CALL sp_create_event_full(6, 5, 'عيد ميلاد سامر الـ 18', 'حفل مفاجئ', '2026-05-10', 'منزل العائلة', 3000, 1, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 8, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-05", "date_due": "2026-05-09", "user_assign_id": 16,
+--             "description": "إضاءة ديسكو", "cost": 800, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 12, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-01", "date_due": "2026-05-09", "user_assign_id": 22,
+--             "description": "دي جي وألعاب نارية", "cost": 1500, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 3, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 3000, "payment_method": "تحويل", "payment_date": "2026-05-01", "url_image": null, "description": "دفعة كاملة"}
+--     ]
+-- }');
+
+-- -- حدث 10: مؤتمر صحي (تم تحويله إلى STRING)
+-- CALL sp_create_event_full(7, 6, 'المؤتمر السنوي للصحة', 'بمشاركة 500 طبيب', '2026-05-20', 'مركز المعارض', 25000, 2, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 5, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-01", "date_due": "2026-05-19", "user_assign_id": 17,
+--             "description": "جدولة الجلسات", "cost": 5000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 5, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 7, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-15", "date_due": "2026-05-19", "user_assign_id": 16,
+--             "description": "أنظمة صوتية متكاملة", "cost": 3000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 2, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-18", "date_due": "2026-05-19", "user_assign_id": 25,
+--             "description": "تنظيف القاعة قبل وبعد", "cost": 1000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 15000, "payment_method": "تحويل", "payment_date": "2026-04-15", "url_image": null, "description": "رعاية ذهبية"},
+--         {"amount": 10000, "payment_method": "شيك", "payment_date": "2026-05-10", "url_image": null, "description": "تذاكر الحضور"}
+--     ]
+-- }');
+
+-- -- حدث 11: حفل خيري (تم تحويله إلى STRING)
+-- CALL sp_create_event_full(8, 7, 'ليلة الخير للأيتام', 'عشاء وجمع تبرعات', '2026-05-25', 'صالة الياسمين', 5000, 1, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 1, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-20", "date_due": "2026-05-24", "user_assign_id": 14,
+--             "description": "وجبات للأطفال", "cost": 2500, "notes": "200 وجبة", "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 9, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-23", "date_due": "2026-05-24", "user_assign_id": 18,
+--             "description": "استقبال وتوجيه", "cost": 500, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 1, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 5000, "payment_method": "تبرعات", "payment_date": "2026-05-20", "url_image": null, "description": "من عدة جهات"}
+--     ]
+-- }');
+
+-- -- حدث 12: معرض فني (تم تحويله إلى STRING)
+-- CALL sp_create_event_full(9, 8, 'معرض الفن التشكيلي', 'افتتاح معرض للوحات', '2026-06-01', 'جاليري الرواق', 12000, 3, 'DAY', '{
+--     "tasks": [
+--         {
+--             "service_id": 3, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-20", "date_due": "2026-05-30", "user_assign_id": 15,
+--             "description": "تركيب إضاءة على اللوحات", "cost": 2000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 5, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 2, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-25", "date_due": "2026-05-31", "user_assign_id": 19,
+--             "description": "توثيق المعرض", "cost": 1500, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 3, "reminder_unit": "DAY"
+--         },
+--         {
+--             "service_id": 10, "type_task": "SERVICE", "status": "PENDING",
+--             "date_start": "2026-05-30", "date_due": "2026-06-01", "user_assign_id": 20,
+--             "description": "نقل اللوحات للجاليري", "cost": 1000, "notes": null, "url_image": null,
+--             "reminder_type": "BEFORE_DUE", "reminder_value": 2, "reminder_unit": "DAY"
+--         }
+--     ],
+--     "incomes": [
+--         {"amount": 12000, "payment_method": "رعاية ثقافية", "payment_date": "2026-05-10", "url_image": null, "description": "من وزارة الثقافة"}
+--     ]
+-- }');
+
+
+/*
+mysqldump -u root -proot --routines --events --triggers --no-data my_party_4 > my_party_db_backup.sql && 
+mysqldump -u root -proot --no-create-info my_party_4 Roles Permissions Role_Details Role_Permissions >> my_party_db_backup.sql && 
+mysqldump -u root -proot --no-create-info --where="role_name='admin'" my_party_4 Users >> my_party_db_backup.sql
+*/;

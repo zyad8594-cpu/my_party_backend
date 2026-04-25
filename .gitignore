@@ -1,0 +1,11 @@
+# الملفات الحساسة
+.env
+config/serviceAccountKey.json
+*.key
+*.pem
+
+# الاعتماديات (لن ترفع إلى GitHub)
+node_modules/
+
+# ملفات النظام
+.DS_Store

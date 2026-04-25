@@ -1,0 +1,45 @@
+const fs = require('fs');
+const mysql = require('mysql2/promise');
+require('dotenv').config();
+ 
+const pool = mysql.createPool({
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || process.env.PORT || 3306,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'root',
+    database: process.env.DB_NAME || 'my_party_4',
+    waitForConnections: true,
+    connectTimeout: 30000,
+    connectionLimit: 10,
+    queueLimit: 0,
+    ssl: {
+        ca: fs.readFileSync(process.env.DB_SSL_CA || '/home/zyad/Desktop/all devlopment projects/flutter/my_party/backend/ca.pem')
+//         ca: `-----BEGIN CERTIFICATE-----
+// MIIERDCCAqygAwIBAgIUIRMQZIV8QLE19Q2cerajKK+POTUwDQYJKoZIhvcNAQEM
+// BQAwOjE4MDYGA1UEAwwvOGZlNGY0ZDctZDg1MS00MjdkLWIzYjYtZTU3YWNkYTBl
+// ZWE1IFByb2plY3QgQ0EwHhcNMjYwNDI0MjIxNzM4WhcNMzYwNDIxMjIxNzM4WjA6
+// MTgwNgYDVQQDDC84ZmU0ZjRkNy1kODUxLTQyN2QtYjNiNi1lNTdhY2RhMGVlYTUg
+// UHJvamVjdCBDQTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAM/7wul3
+// 0VabpCQ6ocjOZZVKaPsgGihmxx38OZwCcXKPI4Xz9stElv55EsyRwWmYdJ4xdr3Q
+// R3VlgYhbzZ9ZRpJ+Qs4pPzLHA2vJsWiOgUpTJV7p5skMohlVXoA1J/AA6hNgbM6e
+// vP4V6MJmSADghlv1d46lyeVmkvluCutVzLwy+ydyntq/BYS+z02WSGEYec7J2s/d
+// AE/kL3gFzEqDYLExEQvjNiB5Ad7zMT4roQZlXDCjyCTgzDSvAsHew+yFpV1NkBqY
+// VlqvTCUSLEBcUGQAi9y8qebjI0rPlG7rTm7/V092GOE2htDo7Kh48TfVT16gbqLt
+// s61r5QIAI+3fjStf8rNoa52SYg8j+oziIAxJzbiYJZjmGX1uh8vzVNaOXrMofnLi
+// /lAT+AH5xWMfyVbo+znAKcESbZbSJDjrIjT1kWmOP1wmpgPa1kMx3F4U2JNWASbz
+// kj+Q9/fXkOhfiJcDLTh0YF9XYScQxW7pLqmHI5q7vNhVqAEpvcSCC3879wIDAQAB
+// o0IwQDAdBgNVHQ4EFgQUSOj0HDH/90A0OfDU5dVud+bKW2kwEgYDVR0TAQH/BAgw
+// BgEB/wIBADALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQEMBQADggGBABYzRHNrgvNK
+// qlJ5vmthErqAZsikXQuTh3qNdPGYQN5DurrsQJq5HiysFmbGlo8RyMPVEumYULQc
+// U/GhTfBsUPPSy53esLPMiYLp1e4D8USxQ+gwdw4COx7h6xnGl2DAcrsTDZm42pcI
+// 3z3MAI3+KmKZwGkhqu8P3lXkF7mqaVThHSSJkKz0h1SYuYG4P5lHHK3fknyjlzmf
+// 7RMHdrH66xR5CSsEb3GhO5bOcaNqXq8u2hrwgfVeHmZju4Ywhu4cp1Jqdnza1oFL
+// 0EDoFbaxatjALsOD+RbPEYOfhUMOYYzK8HkUHlZdzoktt5KrK/iG8eVfInx4RgS4
+// OaT6Po2QzsQ+yEMSf8Ct9s5JD4YOd0IM+JMrnZyHhktEok6gMRFsXDcBVS2VbdKj
+// 8ojuRsR3s3ZpNgr317maRYXQh+in3dtD+rCPrmFC4zVOP+m/SlUnt1PCA3+ptqsE
+// zDEiYIdCS0J+q/PeI5JSpJo7CmIZQg8Zzz3vZaoJFJ/GgQbeJTlksA==
+// -----END CERTIFICATE-----`
+    }
+});
+
+module.exports = pool;

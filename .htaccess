@@ -1,0 +1,12 @@
+# This file is for Apache servers (e.g., if you use Apache as a reverse proxy).
+# For Node.js running directly (node index.js), this file is ignored.
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+</IfModule>
+
+# If you are using Apache to proxy to Node.js on port 3000:
+# RewriteEngine On
+# RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
