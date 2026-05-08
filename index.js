@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 const ApiResponse = require('./utils/apiResponse');
+const { inject } = require('@vercel/analytics/server');
 
 const { initSocket, sendNotificationToClients } = require('./config/server');
 const { initRealtimeNotifier } = require('./config/realtimeNotifier');
@@ -37,6 +38,13 @@ app.use('/api/system_users', require('./routes/systemUsers'));
 app.get('/', (req, res) => {
     res.json({ message: 'مرحباً بكم في واجهة برمجة تطبيقات My Party Pro مع الإشعارات الفورية' });
 });
+
+// Vercel Analytics integration
+// Note: Vercel Web Analytics is designed for frontend applications.
+// For backend API monitoring, consider using Vercel's observability features
+// (Logs, Tracing, Alerts) instead. The inject() function is available if needed
+// for server-side rendered HTML responses.
+inject();
 
 
 
